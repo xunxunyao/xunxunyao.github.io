@@ -5,11 +5,11 @@
   
 
   
-  <title>VS Code 配置 | xunxun&#39;s Blog</title>
+  <title>Vue 项目的 VS Code 配置 | xunxun&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="打开一个Vue项目，VS Code就会推荐我们安装功能强大的Vetur。这个插件支持语法高亮，安装重载之后，代码瞬间就漂亮起来了。 按照Vetur官网的介绍(具体内容参考官网)，根据项目需要选择安装sass等插件，安装ESLint代码检查插件。然后修改VS Code的settings.js，eslint.validate配置加上vue。最后添加jsconfig.json来帮助VS Code识别vu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VS Code 配置">
+<meta property="og:title" content="Vue 项目的 VS Code 配置">
 <meta property="og:url" content="http://yoursite.com/2019/05/12/vscodeCfg/index.html">
 <meta property="og:site_name" content="xunxun&#39;s Blog">
 <meta property="og:description" content="打开一个Vue项目，VS Code就会推荐我们安装功能强大的Vetur。这个插件支持语法高亮，安装重载之后，代码瞬间就漂亮起来了。 按照Vetur官网的介绍(具体内容参考官网)，根据项目需要选择安装sass等插件，安装ESLint代码检查插件。然后修改VS Code的settings.js，eslint.validate配置加上vue。最后添加jsconfig.json来帮助VS Code识别vu">
@@ -18,11 +18,21 @@
 <meta property="og:image" content="http://yoursite.com/2019/05/12/vscodeCfg/f9c1b2d4.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/12/vscodeCfg/vscodeCfg/1a56a951.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/12/vscodeCfg/1a56a951.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/12/vscodeCfg/9512bd18.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/12/vscodeCfg/vscodeCfg/9512bd18.png">
-<meta property="og:updated_time" content="2019-05-12T15:45:16.386Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/vscodeCfg/9512bd18.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/vscodeCfg/vscodeCfg/d32f21ad.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/vscodeCfg/d32f21ad.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/vscodeCfg/vscodeCfg/385f01cc.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/vscodeCfg/385f01cc.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/vscodeCfg/vscodeCfg/8fb92872.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/vscodeCfg/8fb92872.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/vscodeCfg/vscodeCfg/cdf682cb.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/vscodeCfg/cdf682cb.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/vscodeCfg/vscodeCfg/f3da3f53.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/12/vscodeCfg/f3da3f53.png">
+<meta property="og:updated_time" content="2019-06-15T15:09:20.836Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VS Code 配置">
+<meta name="twitter:title" content="Vue 项目的 VS Code 配置">
 <meta name="twitter:description" content="打开一个Vue项目，VS Code就会推荐我们安装功能强大的Vetur。这个插件支持语法高亮，安装重载之后，代码瞬间就漂亮起来了。 按照Vetur官网的介绍(具体内容参考官网)，根据项目需要选择安装sass等插件，安装ESLint代码检查插件。然后修改VS Code的settings.js，eslint.validate配置加上vue。最后添加jsconfig.json来帮助VS Code识别vu">
 <meta name="twitter:image" content="http://yoursite.com/2019/05/12/vscodeCfg/vscodeCfg/f9c1b2d4.png">
   
@@ -86,11 +96,13 @@
         
   
     <h1 class="article-title" itemprop="name">
-      VS Code 配置
+      Vue 项目的 VS Code 配置
     </h1>
   
 
       </header>
+      <div id="busuanzi_container_page_pv" style="left: 20px;display: inline;color: #ccc;font-size: 12px;position: relative;top: 6px;">
+          本文总阅读量<span id="busuanzi_value_page_pv"></span>次</div>
     
     <div class="article-entry" itemprop="articleBody">
       
@@ -101,16 +113,34 @@
 <p>我们重启VS Code来测试一下，现在有以下的目录结构:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+-- components</span><br><span class="line">|   +-- VTestA.vue</span><br><span class="line">|   +-- VTestB.vue</span><br><span class="line">|   +-- index.js</span><br><span class="line">+-- modules</span><br><span class="line">|   +-- C.vue</span><br></pre></td></tr></table></figure>
 <p>components/index.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> VTestA <span class="keyword">from</span> <span class="string">'./VTestA'</span></span><br><span class="line"><span class="keyword">import</span> VTestB <span class="keyword">from</span> <span class="string">'./VTestB'</span></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  VTestA,</span><br><span class="line">  VTestB</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在C.vue里面输入VTestA，出现了VTestAVue提示,表示该组件：<br><img src="vscodeCfg/f9c1b2d4.png" alt=""><br><img src="/2019/05/12/vscodeCfg/f9c1b2d4.png" title="This is an example image"><br>选中之后，就自动从相应目录导入了这个单文件组件：<br><img src="vscodeCfg/1a56a951.png" alt=""><br><img src="/2019/05/12/vscodeCfg/1a56a951.png" title="This is an example image"><br>但是我们想要有一个统一的出口，把这两个组件整理到index中了，怎么从自动index中导出这个组件呢？<br>如下图，选择提示中的后一个选项，就会从index文件中导入该组件<br><img src="/2019/05/12/vscodeCfg/9512bd18.png" title="This is an example image"><br><img src="vscodeCfg/9512bd18.png" alt=""><br>但是这样引入的路径偶尔会出现错误。造成这个问题的原因是：当导入SFC的时候不能忽略<code>.vue</code>后缀，参考<a href="https://vuejs.github.io/vetur/FAQ.html#vetur-cannot-recognize-my-vue-component-import-such-as-import-comp-from-comp" target="_blank" rel="noopener">这里</a>。</p>
+<p>在C.vue里面输入VTestA，出现了VTestAVue提示,表示该组件：<br><img src="vscodeCfg/f9c1b2d4.png" alt=""><br><img src="/2019/05/12/vscodeCfg/f9c1b2d4.png"><br>选中之后，就自动从相应目录导入了这个单文件组件：<br><img src="vscodeCfg/1a56a951.png" alt=""><br><img src="/2019/05/12/vscodeCfg/1a56a951.png" title="This is an example image"><br>但是我们想要有一个统一的出口，把这两个组件整理到index中了，怎么从自动index中导出这个组件呢？<br>如下图，选择提示中的后一个选项，就会从index文件中导入该组件<br><img src="vscodeCfg/9512bd18.png" alt=""><br><img src="/2019/05/12/vscodeCfg/9512bd18.png"><br>但是这样引入的路径偶尔会出现错误。造成这个问题的原因是：当导入SFC的时候不能忽略<code>.vue</code>后缀，参考<a href="https://vuejs.github.io/vetur/FAQ.html#vetur-cannot-recognize-my-vue-component-import-such-as-import-comp-from-comp" target="_blank" rel="noopener">这里</a>。</p>
 <p>这个组件<code>import</code>到<code>components/index.js</code>文件里的时候，路径的文件名没有写<code>.vue</code>扩展名，所以这里也无法自动的从<code>index.js</code>文件引入。如下加上扩展名就没有问题了。<br>components/index.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> VTestA <span class="keyword">from</span> <span class="string">'./VTestA.vue'</span></span><br><span class="line"><span class="keyword">import</span> VTestB <span class="keyword">from</span> <span class="string">'./VTestB.vue'</span></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  VTestA,</span><br><span class="line">  VTestB</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="ESLint相关配置"><a href="#ESLint相关配置" class="headerlink" title="ESLint相关配置"></a>ESLint相关配置</h3><p>安装完<a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint" target="_blank" rel="noopener">ESLint</a>之后，并没有对<code>.vue</code>文件起作用。<br>我们打开 VS Code 配置文件修改一下配置，让ESLint支持的语言包括<code>.vue</code>文件。</p>
+<ul>
+<li>On Windows/Linux - File &gt; Preferences &gt; Settings</li>
+<li>On macOS - Code &gt; Preferences &gt; Settings</li>
+</ul>
+<p>搜索<code>eslint.validate</code>,我们选择直接打开json文件进行编辑：<br><img src="vscodeCfg/d32f21ad.png" alt=""><br><img src="/2019/05/12/vscodeCfg/d32f21ad.png"><br>右上角也有一个按钮能直接打开：<br><img src="vscodeCfg/385f01cc.png" alt=""><br><img src="/2019/05/12/vscodeCfg/385f01cc.png"><br>在配置文件中添加如下配置<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"eslint.validate"</span>: [</span><br><span class="line">    <span class="string">"javascript"</span>,</span><br><span class="line">    <span class="string">"javascriptreact"</span>,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"language"</span>: <span class="string">"vue"</span>,</span><br><span class="line">      <span class="attr">"autoFix"</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>配置完成之后测试一下，在行末加个分号（ESLint推荐不使用分号），会出现红色波浪线提示。<br>注意上文配置中的<code>autoFix</code>，它用来自动修复有问题的写法，这个非常的方便。怎么样使用呢？<br>快捷键：</p>
+<ul>
+<li>On Windows/Linux - <code>Ctrl+shift+p</code></li>
+<li>On macOS - <code>⇧⌘P</code></li>
+</ul>
+<p>打开命令面板，搜索一下eslint，可以看到这条<code>Fix all auto-fixable Problems</code>命令。回车执行一下，多余的分号就自动去掉了。常用的命令，VS Code会记录下来排在前列，后面使用打开命令面板就能看到了。<br><img src="vscodeCfg/8fb92872.png" alt=""><br><img src="/2019/05/12/vscodeCfg/8fb92872.png"></p>
+<h3 id="lt-template-gt-校验"><a href="#lt-template-gt-校验" class="headerlink" title="&lt;template&gt; 校验"></a><code>&lt;template&gt;</code> 校验</h3><p>使用<code>iview</code>框架的时候，有一些组件会被标识语法错误。比如，这样使用<code>&lt;Col&gt;&lt;/Col&gt;</code>组件的时候，就会报错（由于html中<code>&lt;col/&gt;</code>是自闭合标签）。类似这种情况，我们想要修改模版的校验规则，要怎么做呢？<br>vetur支持对模版<code>&lt;template&gt;</code>进行校验，但是它内部使用的是一个固定版本的<code>eslint-plugin-vue</code>，并且不可配置。vetur官方给出的<a href="https://github.com/vuejs/vetur/blob/master/docs/linting-error.md#linting-for-template" target="_blank" rel="noopener">建议</a>是要关掉vetur的模版配置，自己安装<code>eslint-plugin-vue</code>。</p>
+<ul>
+<li>在配置中，设置vetur.validation.template: false，关掉vetur模版校验，使用ESLint的；</li>
+<li>在项目中安装<code>eslint-plugin-vue</code>插件；</li>
+<li>在<code>.eslintrc</code>文件中设置ESLint规则。</li>
+</ul>
+<p>比如刚才的<code>iview</code>组件的例子，配置如下：<br>.eslintrc<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"extends"</span>: [</span><br><span class="line">    <span class="string">"eslint:recommended"</span>,</span><br><span class="line">    <span class="string">"plugin:vue/recommended"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"rules"</span>: &#123;</span><br><span class="line">    <span class="attr">"vue/no-parsing-error"</span>: [</span><br><span class="line">       <span class="number">2</span>,</span><br><span class="line">      &#123;</span><br><span class="line">       <span class="attr">"x-invalid-end-tag"</span>: <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="其他细节"><a href="#其他细节" class="headerlink" title="其他细节"></a>其他细节</h3><p>ESLint规则缩进是两个空格，但是VS Code默认的tab是4个空格，在配置中改成2个：<br><img src="vscodeCfg/cdf682cb.png" alt=""><br><img src="/2019/05/12/vscodeCfg/cdf682cb.png"></p>
+<p>安装vue但文件组件的模版插件<a href="https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-snippets#overview" target="_blank" rel="noopener"><code>Vue VSCode Snippets</code></a>，方便我们快速新建<code>.vue</code>文件。<br><img src="vscodeCfg/f3da3f53.png" alt=""><br><img src="/2019/05/12/vscodeCfg/f3da3f53.png"></p>
 
       
     </div>
     <footer class="article-footer">
-
-      <span id="busuanzi_container_page_pv">
-          本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span>
-      <a data-url="http://yoursite.com/2019/05/12/vscodeCfg/" data-id="cjvl43pme0000gq89hswcypav" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/05/12/vscodeCfg/" data-id="cjwx9i7en0000i57vnnjqxyzb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -150,7 +180,7 @@
       <ul>
         
           <li>
-            <a href="/2019/05/12/vscodeCfg/">VS Code 配置</a>
+            <a href="/2019/05/12/vscodeCfg/">Vue 项目的 VS Code 配置</a>
           </li>
         
       </ul>

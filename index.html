@@ -90,7 +90,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本文参考<code>webpack</code>创始人 Tobias Koppers 的视频 <a href="https://www.youtube.com/watch?v=UNMkLHzofQI" target="_blank" rel="noopener">Webpack founder Tobias Koppers demos bundling live by hand</a>，学习了<code>webpack</code>打包过程。</p>
+        <p>本文参考<code>webpack</code>创始人 Tobias Koppers 的视频 <a href="https://www.youtube.com/watch?v=UNMkLHzofQI" target="_blank" rel="noopener">Webpack founder Tobias Koppers demos bundling live by hand</a>,梳理<code>webpack</code>打包过程。</p>
 <h1 id="手动打包文件"><a href="#手动打包文件" class="headerlink" title="手动打包文件"></a>手动打包文件</h1><h2 id="文件目录"><a href="#文件目录" class="headerlink" title="文件目录"></a>文件目录</h2><p>我们准备一个极简单的项目来进行打包，目录结构和内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+-- src</span><br><span class="line">| +-- big.js</span><br><span class="line">| +-- helloWorld.js</span><br><span class="line">| +-- index.js</span><br><span class="line">| +-- lazy.js</span><br></pre></td></tr></table></figure></p>
 <p>index.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> helloWorld <span class="keyword">from</span> <span class="string">'./helloWorld'</span></span><br><span class="line"><span class="keyword">const</span> node = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>)</span><br><span class="line">node.innerHTML = helloWorld + <span class="string">'loading...'</span></span><br><span class="line"><span class="keyword">import</span>(<span class="comment">/* webpackChunkName: "async" */</span> <span class="string">'./lazy'</span>).then(<span class="function">(<span class="params">&#123; <span class="keyword">default</span>: lazy &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">node.innerHTML = helloWorld + lazy</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">document</span>.body.appendChild(node)</span><br></pre></td></tr></table></figure></p>
 <p>helloWorld.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> big <span class="keyword">from</span> <span class="string">'./big'</span></span><br><span class="line"><span class="keyword">const</span> helloWorld = big(<span class="string">'hello world!'</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> helloWorld</span><br></pre></td></tr></table></figure></p>
@@ -141,7 +141,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/17/miniWebpack/" data-id="cjymrecsj0001c57vmh2t75zl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/17/miniWebpack/" data-id="cjymsk5qv0001vj7vn0j6nqdw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -211,7 +211,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/12/vscodeCfg/" data-id="cjymrecrm0000c57vw87qna95" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/05/12/vscodeCfg/" data-id="cjymsk5pq0000vj7vytanqgkp" class="article-share-link">Share</a>
       
       
     </footer>

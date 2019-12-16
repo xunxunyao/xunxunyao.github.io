@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>简易模板编译工具 | xunxun&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="项目中有一个需求是这样的：有一个轮播列表组件，提供工具栏，可以让用户通过配置来调整列表颜色、边框、大小和动画等各项参数。每次保存配置的时候重新渲染，刷新列表样式。所以这里列表的html和css将会有很多从配置文件获取而来的变量，而不是像以前渲染出来的模板一样固定数值。利用ES6的template string可以很容易的做到，在js中动态渲染html：12345678910111213141516">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简易模板编译工具">
+<meta property="og:url" content="http://yoursite.com/2019/12/16/compileTemplate/index.html">
+<meta property="og:site_name" content="xunxun&#39;s Blog">
+<meta property="og:description" content="项目中有一个需求是这样的：有一个轮播列表组件，提供工具栏，可以让用户通过配置来调整列表颜色、边框、大小和动画等各项参数。每次保存配置的时候重新渲染，刷新列表样式。所以这里列表的html和css将会有很多从配置文件获取而来的变量，而不是像以前渲染出来的模板一样固定数值。利用ES6的template string可以很容易的做到，在js中动态渲染html：12345678910111213141516">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2019-12-16T04:17:18.512Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简易模板编译工具">
+<meta name="twitter:description" content="项目中有一个需求是这样的：有一个轮播列表组件，提供工具栏，可以让用户通过配置来调整列表颜色、边框、大小和动画等各项参数。每次保存配置的时候重新渲染，刷新列表样式。所以这里列表的html和css将会有很多从配置文件获取而来的变量，而不是像以前渲染出来的模板一样固定数值。利用ES6的template string可以很容易的做到，在js中动态渲染html：12345678910111213141516">
+  
+    <link rel="alternate" href="/atom.xml" title="xunxun&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">xunxun&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-compileTemplate" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/16/compileTemplate/" class="article-date">
+  <time datetime="2019-12-16T03:38:27.000Z" itemprop="datePublished">2019-12-16</time>
+</a>
+    
+</span>
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      简易模板编译工具
+    </h1>
+  
+
+      </header>
+      <div id="busuanzi_container_page_pv" style="left: 20px;display: inline;color: #ccc;font-size: 12px;position: relative;top: 6px;">
+          本文总阅读量<span id="busuanzi_value_page_pv"></span>次</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>项目中有一个需求是这样的：有一个轮播列表组件，提供工具栏，可以让用户通过配置来调整列表颜色、边框、大小和动画等各项参数。每次保存配置的时候重新渲染，刷新列表样式。所以这里列表的html和css将会有很多从配置文件获取而来的变量，而不是像以前渲染出来的模板一样固定数值。<br>利用ES6的<code>template string</code>可以很容易的做到，在js中动态渲染html：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> list = [</span><br><span class="line">    &#123;</span><br><span class="line">        name: <span class="string">'四毛'</span>,</span><br><span class="line">        description: <span class="string">'可爱'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        name: <span class="string">'八毛'</span>,</span><br><span class="line">        description: <span class="string">'也可爱'</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"><span class="keyword">let</span> items = <span class="string">``</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> i <span class="keyword">of</span> list) &#123;</span><br><span class="line">    items += <span class="string">`&lt;li&gt;<span class="subst">$&#123;i.name&#125;</span>:<span class="subst">$&#123;i.description&#125;</span>&lt;/li&gt;`</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> content = <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;ul&gt;</span></span><br><span class="line"><span class="string">        <span class="subst">$&#123;items&#125;</span></span></span><br><span class="line"><span class="string">    &lt;/ul&gt;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line">$(<span class="keyword">this</span>.$container).html(content)</span><br></pre></td></tr></table></figure></p>
+<p>但是这样写结构样式和js逻辑没有分离，增加了编码和维护成本。希望的是可以把html和css放在模板中，编译成字符串的形式，给js使用。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>开始之前，我们选定轻便简单的<code>gulp</code>来构建文件。</p>
+<p>首先，我们想要拥有单独的html模板文件，并且做到结构和样式分离。简单的方法就是在<code>&lt;style&gt;</code>标签里写样式，再用 <a href="https://www.npmjs.com/package/gulp-inline-css" target="_blank" rel="noopener">gulp-inline-css</a>     将css处理成内联样式。</p>
+<p>第二步，带有样式的html模板文件要怎么变成js字符串呢？可以利用 <a href="https://www.npmjs.com/package/gulp-html-to-js" target="_blank" rel="noopener">gulp-html-to-js</a> 将html处理成js。这个插件可以一同处理多个html模板，最终生成的js中，是这样的形式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line"><span class="built_in">module</span>.exports[<span class="string">'index.html'</span>] = <span class="string">'&lt;p&gt;Hello world!&lt;/p&gt;'</span></span><br></pre></td></tr></table></figure></p>
+<p>这样，在js中就能导入相应的模板字符串。<br>以上两步，gulpfile.js只需要这样处理：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> inlineCss = <span class="built_in">require</span>(<span class="string">'gulp-inline-css'</span>)</span><br><span class="line"><span class="keyword">const</span> html2js = <span class="built_in">require</span>(<span class="string">'gulp-html-to-js'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">templates</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> gulp.src(<span class="string">'src/templates/*.html'</span>)</span><br><span class="line">        .pipe(inlineCss())</span><br><span class="line">        .pipe(html2js(&#123;<span class="attr">concat</span>: <span class="string">'templates.js'</span>&#125;))</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'./'</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.templates = templates</span><br></pre></td></tr></table></figure></p>
+<p>第三步，处理变量。以上的模板处理出来是一个字符串，但是我们需要利用配置文件动态改变样式，直接字符串模板显然不符合需求。我们可以这样做：将<code>module.exports</code>出来的内容处理成一个<code>function</code>，参数是配置文件数据，返回值是模板字符串和变量的拼接。形如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">config, data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'&lt;p style="color:'</span> +  config.color  + <span class="string">'"&gt;'</span> + data.value + <span class="string">'&lt;/p&gt;'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样，可以将带有变量的html抽离出去，构建成js，再动态<code>import</code>，做到结构、样式、逻辑分离。现在最重要的一个问题，就是怎么模板变成拼接的字符串。</p>
+<h3 id="处理变量"><a href="#处理变量" class="headerlink" title="处理变量"></a>处理变量</h3><p>通过 <a href="https://www.npmjs.com/package/gulp-html-to-js" target="_blank" rel="noopener">gulp-html-to-js</a> 处理之后的文件， 我们通过 <a href="https://www.npmjs.com/package/through2" target="_blank" rel="noopener">through2</a> 拿到文件流。将文件流转成字符串，之后就可以对字符串操作。提取<code>module.exports</code>出来的内容，用正则将原本的模板转化成<code>function</code>。利用 <a href="https://www.npmjs.com/package/through2" target="_blank" rel="noopener">through2</a> 可以提取文件的文本内容，处理完我们想要的操作之后，记得字符串转回去流。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">templates</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> gulp.src(<span class="string">'src/templates/*.html'</span>)</span><br><span class="line">        .pipe(inlineCss())</span><br><span class="line">        .pipe(html2js(&#123;<span class="attr">concat</span>: <span class="string">'templates.js'</span>&#125;))</span><br><span class="line">        .pipe(through.obj(<span class="function"><span class="keyword">function</span> (<span class="params">file, encode, cb</span>) </span>&#123;</span><br><span class="line">            <span class="comment">//  流转化成字符串</span></span><br><span class="line">            <span class="keyword">let</span> result = file.contents.toString()</span><br><span class="line">            <span class="comment">// 正则拿到“module.exports['index.html'] = '内容'” 导出的内容</span></span><br><span class="line">            result = result.replace(<span class="regexp">/(module.exports\['.+?'\] = )('[\s\S]*?(?&lt;!\\)')/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">match, p1, p2</span>)</span>&#123;</span><br><span class="line">               <span class="comment">// 将原来的字符串模板处理成方法，parse函数下文解释</span></span><br><span class="line">               <span class="comment">// return p1 + parse(p2)</span></span><br><span class="line">            &#125;)</span><br><span class="line">            file.contents = <span class="keyword">new</span> Buffer(result) <span class="comment">// 字符串转成流</span></span><br><span class="line">            <span class="comment">// 提供给下个pipe使用</span></span><br><span class="line">            <span class="keyword">this</span>.push(file)</span><br><span class="line">            cb()</span><br><span class="line">         &#125;))</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'./'</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在模板中，需要动态变更的变量，设置一个插值语法，比如常用的<code>&lt;%= %&gt;</code>：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">data.value</span> %&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>我们要将这个模板变成：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">config, data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'&lt;p&gt;'</span> + data.value + <span class="string">'&lt;/p&gt;'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以使用正则替换：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parse</span> (<span class="params">content</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> evalExpr = <span class="regexp">/&lt;%=(.+?)%&gt;/g</span></span><br><span class="line">    content = content</span><br><span class="line">        .replace(evalExpr, <span class="string">"' + $1 +'"</span> ))</span><br><span class="line">    <span class="keyword">let</span> compile = <span class="string">`function (config, data) &#123;</span></span><br><span class="line"><span class="string">        return '<span class="subst">$&#123;content&#125;</span>'</span></span><br><span class="line"><span class="string">        &#125;`</span></span><br><span class="line">    <span class="keyword">return</span> compile</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以得到：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"function (config, data) &#123;</span></span><br><span class="line"><span class="string">      return '&lt;p&gt;' +  data.value  +'&lt;p&gt;'</span></span><br><span class="line"><span class="string">  &#125;"</span></span><br></pre></td></tr></table></figure></p>
+<p>我们还希望模板能处理简单的循环或者是判断语句，这里用<code>&lt;% %&gt;</code>来放置js语句。可以看到整个编译函数的核心就是将插值的变量/语句提取出来，与其他的进行字符串拼接。这里参考阮一峰老师提到过的<a href="https://es6.ruanyifeng.com/#docs/string#%E5%AE%9E%E4%BE%8B%EF%BC%9A%E6%A8%A1%E6%9D%BF%E7%BC%96%E8%AF%91" target="_blank" rel="noopener">编译函数</a> 来优化一下代码。<br>写一个拼接函数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> output = <span class="string">''</span></span><br><span class="line"><span class="keyword">const</span> echo = <span class="function"><span class="keyword">function</span> (<span class="params">html</span>) </span>&#123;</span><br><span class="line">   output += html</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上文中正则插值替换，就变成<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">echo(<span class="string">'&lt;p&gt;'</span> )</span><br><span class="line">echo（ data.value）</span><br><span class="line">echo（ <span class="string">'&lt;p&gt;'</span>）</span><br><span class="line"><span class="comment">//正则</span></span><br><span class="line">content = content.replace(evalExpr, <span class="string">`')\n echo(<span class="subst">$&#123;expr&#125;</span>)\n echo('`</span> ))</span><br></pre></td></tr></table></figure></p>
+<p>对于js语句也是相同的处理方法。<br>有一点需要注意的是，我们生成的字符串都是用单引号，如果在表达式中需要用到字符串（也会有一个单引号），会被加上转义符，这里还要将转义符去掉。<br>对于css的变量，如果使用 <code>&lt;</code> 的插值，css处理的插件会报错。这里我们使用以下符号来进行插值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`&#123;%= %&#125;`</span></span><br></pre></td></tr></table></figure></p>
+<p>在内联处理之后，再转化成 <code>&lt;</code>，就可以不用另外对css进行处理了。<br>以下就是完整的编译函数。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parse</span> (<span class="params">content</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> cssExpr = <span class="regexp">/\\'\&#123;(%[\s\S]+?%)\&#125;\\'/g</span></span><br><span class="line">    <span class="keyword">const</span> evalExpr = <span class="regexp">/&lt;%=(.+?)%&gt;/g</span></span><br><span class="line">    <span class="keyword">const</span> expr = <span class="regexp">/&lt;%([\s\S]+?)%&gt;/g</span></span><br><span class="line">    content = content</span><br><span class="line">        .replace(cssExpr, <span class="string">"&lt;$1&gt;"</span>)</span><br><span class="line">        .replace(evalExpr, <span class="function"><span class="keyword">function</span>(<span class="params">match, p</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">const</span> expr = p.replace(<span class="regexp">/\\'/g</span>, <span class="string">"'"</span>) <span class="comment">// 处理被转义的单引号</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">`')\n echo(<span class="subst">$&#123;expr&#125;</span>)\n echo('`</span></span><br><span class="line">        &#125;)</span><br><span class="line">        .replace(expr, <span class="function"><span class="keyword">function</span>(<span class="params">match, p</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">const</span> expr = p.replace(<span class="regexp">/\\'/g</span>, <span class="string">"'"</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="string">`')\n <span class="subst">$&#123;expr&#125;</span>\n echo('`</span></span><br><span class="line">        &#125;)</span><br><span class="line">    <span class="keyword">let</span> compile = <span class="string">`function (config, data) &#123;</span></span><br><span class="line"><span class="string">        let output = ''</span></span><br><span class="line"><span class="string">        const echo = function (html) &#123;</span></span><br><span class="line"><span class="string">             output += html</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        echo(<span class="subst">$&#123;content&#125;</span>)</span></span><br><span class="line"><span class="string">        return output</span></span><br><span class="line"><span class="string">        &#125;`</span></span><br><span class="line">    <span class="keyword">return</span> compile</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这就完成了，我们可以这样书写html和css</p>
+<p>content.html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;% for (let count = 0; count &lt; config.score.number; count++)&#123;%&gt;</span><br><span class="line">    &lt;% if (count &lt; 10) &#123;%&gt;</span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"&lt;%= config.score.highlight %&gt;"</span> <span class="attr">class</span>=<span class="string">"score-img"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">%</span> &#125; <span class="attr">else</span> &#123;%&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"&lt;%= config.score.defaultIcon %&gt;"</span> <span class="attr">class</span>=<span class="string">"score-img"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%</span> &#125;%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> &#125;%&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">.origin-list-flip-with-score .item-number &#123;</span></span><br><span class="line"><span class="undefined">    width: '&#123;%= config.orderNumber.width %&#125;'px;</span></span><br><span class="line"><span class="undefined">    margin: '&#123;%= config.nameArea.position === 'left' ? '0 5px 0 0' : '0 0 0 5px' %&#125;';</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在js中这样使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> html <span class="keyword">from</span> <span class="string">'./templates.js'</span></span><br><span class="line">$(<span class="keyword">this</span>.$container).html(html[<span class="string">'content.html'</span>](<span class="keyword">this</span>.style, &#123;</span><br><span class="line">    listData: <span class="keyword">this</span>.listData</span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/16/compileTemplate/" data-id="ck47w1tt00002dl7vvy4feet1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/17/miniWebpack/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">webpack 打包过程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/16/compileTemplate/">简易模板编译工具</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/17/miniWebpack/">webpack 打包过程</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/12/vscodeCfg/">Vue 项目的 VS Code 配置</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 xunxun@zhenmei.li<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
